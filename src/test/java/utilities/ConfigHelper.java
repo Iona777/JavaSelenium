@@ -12,7 +12,7 @@ public class ConfigHelper
     Properties configFile;
     //Constructor - not required, use default. Should I include Lombok @NoArgsConstructor?
 
-    public String getProperty(String key)
+    public static String getProperty(String key)
     {
         try {
             Path target = Paths.get("src/test/java/resources");

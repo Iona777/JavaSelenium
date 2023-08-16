@@ -14,7 +14,11 @@ public class Driver {
     //See the 'Explain the Driver class' lecture in Compendium. Reusing the driver rather than quitting and restarting
     //on every test may be a useful way to speed up the tests.
 
+
         public static WebDriver driver = null;
+
+        //This value will come from config
+        public static String rootURL;
 
         public static void getDriver(String selectedBrowser)
         {
@@ -43,6 +47,11 @@ public class Driver {
         public static void pause(int timeInMilliseconds) throws InterruptedException {
 
                 Thread.sleep(timeInMilliseconds);
+        }
+
+        public static void ShutDown()
+        {
+            driver.quit();
         }
 
 }
