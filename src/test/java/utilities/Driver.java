@@ -4,8 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.sql.Time;
+import java.time.Duration;
 
 public class Driver {
 
@@ -16,6 +18,9 @@ public class Driver {
 
 
         public static WebDriver driver = null;
+        public static final int seconds = Integer.parseInt(ConfigHelper.getProperty("defaultTimeout"));
+        public static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(seconds);
+
 
         //This value will come from config
         public static String rootURL;
