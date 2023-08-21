@@ -27,9 +27,10 @@ public class LoginSteps {
 
     }
     @When("I enter username {string} and password {string}")
-    public void i_enter_username_and_password(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void i_enter_username_and_password(String userName, String password) {
+        theLoginPage.EnterUserName(userName);
+        theLoginPage.EnterPassword(password);
+        theLoginPage.ClickOnLoginButton();
     }
     @Then("the Dashboard page is displayed")
     public void the_dashboard_page_is_displayed() {

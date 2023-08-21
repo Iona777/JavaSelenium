@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.By;
 import utilities.Driver;
+import utilities.ManipulateElements;
 
 @NoArgsConstructor
 public class LoginPage {
@@ -19,5 +20,18 @@ public class LoginPage {
         Driver.navigateTo(Driver.rootURL);
     }
 
+    public void EnterUserName(String userName)
+    {
+        ManipulateElements.EnterText(USERNAME_LOCATOR, userName);
+    }
 
+    public void EnterPassword(String password)
+    {
+        ManipulateElements.EnterText(PASSWORD_LOCATOR, password);
+    }
+
+    public void ClickOnLoginButton()
+    {
+        ManipulateElements.ClickOnElement(LOGINBUTTON_LOCATOR);
+    }
 }
