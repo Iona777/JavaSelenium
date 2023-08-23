@@ -3,6 +3,7 @@ package stepDefs;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.DashboardPage;
 import pages.LoginPage;
 import utilities.ConfigHelper;
 import utilities.Driver;
@@ -10,10 +11,12 @@ import utilities.Driver;
 public class LoginSteps {
 
     private LoginPage theLoginPage;
+    private DashboardPage theDashboardPage;
 
     public LoginSteps()
     {
         theLoginPage = new LoginPage();
+        theDashboardPage = new DashboardPage();
     }
 
     @Given("I navigate to the Login page")
@@ -33,9 +36,10 @@ public class LoginSteps {
         theLoginPage.ClickOnLoginButton();
     }
     @Then("the Dashboard page is displayed")
-    public void the_dashboard_page_is_displayed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_dashboard_page_is_displayed() throws InterruptedException {
+        theDashboardPage.CheckTitle();
+        //Pause so we can see the page
+        Driver.pause(2000);
     }
 
 }

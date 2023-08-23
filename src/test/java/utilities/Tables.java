@@ -84,6 +84,8 @@ public class Tables {
      * @param nCol Index of the column to return
      * @return WebElement
      */
+
+
     public static WebElement GetTableNthRowAndColumn(By by, String rowTagName, String colTagName, int nRow, int nCol)
     {
         WebElement tableElement =  GetElements.GetVisibleElement(by);
@@ -102,17 +104,24 @@ public class Tables {
     }
 
     /**
-     * Checks to see if all the displayed columns in the table contain the expected text
+     * Checks to see if all the displayed columns in the nthRow contain the expected text
      * @param tableBy Used to locate the element, e.g. By.Id("xyz")
-     * @param colBy Tag name to identify columns
-     * @param expectedText Text each column should equal
-     * @return
+     * @param rowBy Used to locate the element, e.g. By.Id("xyz")
+     * @param colBy Tag name to idenfify the table column. Usually "td" but could vary
+     * @param nRow Index of the row to return
+     * @param expectedText  text each column should equal
+     * @return boolean
      */
-    public static boolean AllColumnsEqualSpecifiedText(By tableBy, By colBy, String expectedText)
+    public static boolean AllColumnsInNthRowEqualSpecifiedText(By tableBy, By rowBy, By colBy,  int nRow, String expectedText)
     {
         boolean allColumnsEqualText = true;
         WebElement tableElement = GetElements.GetVisibleElement(tableBy);
-        List<WebElement> columns = tableElement.findElements(colBy);
+
+        //Tag names may vary, so use parameters
+        List<WebElement> rows = tableElement.findElements(rowBy);
+        WebElement nthRow = rows.get(nRow);
+
+        List<WebElement> columns = nthRow.findElements(colBy);
 
         for (WebElement column: columns)
         {
@@ -128,10 +137,24 @@ public class Tables {
         return allColumnsEqualText;
     }
 
-    public  static  boolean NthColumnEqualsSpecefiedText(By tableBy, By colBy, int columnIndex, String expectedText)
+
+    /**
+     * Checks to see if all the nth column in the tables contain the expected text
+     * @param tableBy Used to locate the element, e.g. By.Id("xyz")
+     * @param colBy   Used to locate the element, e.g. By.Id("xyz")
+     * @param columnIndex index of column
+     * @param expectedText text to check for
+     * @return boolean
+     */
+
+    //The 'table' in this websiste is very odd. It just seems to be a collection of cells rather
+    //than rows and columns. This method only works because only 1 row is returned so the nth cell
+    //is then effectively the nth column
+    //What is a better way to deal with something like this?
+    public static boolean NthColumnEqualsSpecifiedText(By tableBy, By colBy, int columnIndex, String expectedText)
     {
         WebElement tableElement = GetElements.GetVisibleElement(tableBy);
-        List<WebElement> columns = tableElement.findElements(colBy);
+        List<WebElement> columns =  tableElement.findElements(colBy);
         String nthColumnText = columns.get(columnIndex).getText();
 
         return nthColumnText.equals(expectedText);

@@ -92,6 +92,13 @@ public class GetElements {
         return listItems.get(index);
     }
 
+    public static WebElement GetElementByHref(String href)
+    {
+        WebDriverWait wait = new WebDriverWait(Driver.driver, Driver.DEFAULT_TIMEOUT);
+
+        return wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[href*='" + href + "']")));
+    }
+
     public static WebElement GetElementByVisiableText(String  searchText)
     {
         WebDriverWait wait = new WebDriverWait(Driver.driver, Driver.DEFAULT_TIMEOUT);
