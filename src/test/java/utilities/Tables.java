@@ -139,25 +139,39 @@ public class Tables {
 
 
     /**
-     * Checks to see if all the nth column in the tables contain the expected text
+     *
      * @param tableBy Used to locate the element, e.g. By.Id("xyz")
-     * @param colBy   Used to locate the element, e.g. By.Id("xyz")
+     * @param rowBy Used to locate the element, e.g. By.Id("xyz")
+     * @param colBy Used to locate the element, e.g. By.Id("xyz")
      * @param columnIndex index of column
      * @param expectedText text to check for
      * @return boolean
      */
-
-    //The 'table' in this websiste is very odd. It just seems to be a collection of cells rather
-    //than rows and columns. This method only works because only 1 row is returned so the nth cell
-    //is then effectively the nth column
-    //What is a better way to deal with something like this?
-    public static boolean NthColumnEqualsSpecifiedText(By tableBy, By colBy, int columnIndex, String expectedText)
+    public static boolean AllNthColumnsEqualSpecifiedText(By tableBy, By rowBy, By colBy,  int columnIndex, String expectedText)
     {
+        boolean allColumnsEqualText = true;
         WebElement tableElement = GetElements.GetVisibleElement(tableBy);
-        List<WebElement> columns =  tableElement.findElements(colBy);
-        String nthColumnText = columns.get(columnIndex).getText();
 
-        return nthColumnText.equals(expectedText);
+        //Tag names may vary, so use parameters
+        List<WebElement> rows = tableElement.findElements(rowBy);
+
+        for (WebElement row: rows)
+        {
+            List<WebElement> columns = row.findElements(colBy);
+            WebElement nthColumn = columns.get(columnIndex);
+
+            if (nthColumn.isDisplayed())
+            {
+                if (!nthColumn.getText().equals(expectedText))
+                {
+                    allColumnsEqualText = false;
+                    break;
+                }
+            }
+
+        }
+
+        return allColumnsEqualText;
     }
 
 }

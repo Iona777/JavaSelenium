@@ -22,6 +22,7 @@ public class DashboardPage {
     private static final By USERNAME_LOCATOR = By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input");
 
     private static final By ADMIN_TABLE_LOCATOR = By.cssSelector("[role='table']");
+    private static final By ROW_LOCATOR = By.cssSelector("[role='row']");
     private static final By COLUMN_LOCATOR = By.cssSelector("[role='cell']");
     private static final By SEARCH_BUTTON_LOCATOR = By.cssSelector("button[type='submit']");
 
@@ -61,7 +62,7 @@ public class DashboardPage {
     public boolean UserNameColumnContainsExpectedValue(String expectedValue)
     {
         int userNameColIndex = 1;
-        return Tables.NthColumnEqualsSpecifiedText(ADMIN_TABLE_LOCATOR, COLUMN_LOCATOR, userNameColIndex, expectedValue);
+        return Tables.AllNthColumnsEqualSpecifiedText(ADMIN_TABLE_LOCATOR, ROW_LOCATOR ,COLUMN_LOCATOR, userNameColIndex, expectedValue);
     }
 
 }
