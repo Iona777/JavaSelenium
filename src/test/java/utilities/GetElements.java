@@ -24,6 +24,13 @@ public class GetElements {
         return  wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
     }
 
+    public static List<WebElement> GetListOfElements(By elementLocator)
+    {
+        WebDriverWait wait  = new WebDriverWait(Driver.driver, Driver.DEFAULT_TIMEOUT);
+
+        return  wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(elementLocator));
+    }
+
     /**
      * Waits for, then returns a visible web element
      * @param elementLocator Used to locate the element, e.g. By.Id("xyz")
@@ -99,7 +106,7 @@ public class GetElements {
         return wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[href*='" + href + "']")));
     }
 
-    public static WebElement GetElementByVisiableText(String  searchText)
+    public static WebElement GetElementByVisibleText(String  searchText)
     {
         WebDriverWait wait = new WebDriverWait(Driver.driver, Driver.DEFAULT_TIMEOUT);
 

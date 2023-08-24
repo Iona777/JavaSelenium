@@ -157,11 +157,16 @@ public class Tables {
 
         for (WebElement row: rows)
         {
-            List<WebElement> columns = row.findElements(colBy);
+            //List<WebElement> columns = row.findElements(colBy);
+            List<WebElement> columns = Driver.driver.findElements(colBy);
+            List<WebElement> columns2 = tableElement.findElements(colBy);
+            List<WebElement> columns3 = row.findElements(colBy);
             WebElement nthColumn = columns.get(columnIndex);
 
             if (nthColumn.isDisplayed())
             {
+                String colText = nthColumn.getText();
+
                 if (!nthColumn.getText().equals(expectedText))
                 {
                     allColumnsEqualText = false;
